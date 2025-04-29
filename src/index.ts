@@ -3,7 +3,7 @@ import cors from "cors";
 import { notFoundHandler } from "./errorhandlers/error.handler";
 import { errorHandler } from "./errorhandlers/error.handler";
 import { Routes } from "./routes.interface";
-
+import mongoose from "mongoose";
 class App {
   public app: Express;
 
@@ -47,7 +47,16 @@ class App {
   }
 
   private initDB() {
-    //write instruction to init DB here
+    const DATABASE = process.env.DATABASE || "";
+    mongoose
+      .connect(DATABASE)
+      .then(() => {
+        console.log("Database connection successfully established");
+      })
+      .catch((error) => {
+        console.error("Error connecting to database:", error);
+        process.exit(1);
+      });
   }
 
   getApp() {
