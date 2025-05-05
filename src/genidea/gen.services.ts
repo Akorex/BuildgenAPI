@@ -1,8 +1,9 @@
 import { GoogleGenAI } from "@google/genai";
 import { genDTO } from "./gen.interface";
+import { GEMINI_KEY } from "../../env";
 
 export const ai = new GoogleGenAI({
-  apiKey: "AIzaSyBJZY2S3e35U3FJy16g3KbcZNaJUrnZ7ak",
+  apiKey: GEMINI_KEY,
 });
 
 export class GenService {

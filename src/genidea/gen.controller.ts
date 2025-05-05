@@ -15,6 +15,8 @@ export class GenController {
         timeSpan,
       };
 
+      // pass to gemini API to collect results
+
       const results = await this.genService.generateBuildIdea(payload);
 
       if (results) {
@@ -24,8 +26,6 @@ export class GenController {
           timeSpan,
         });
       }
-
-      // pass to gemini API to collect results
 
       res.status(200).json({
         success: true,
