@@ -1,3 +1,11 @@
 import { GenRoute } from "./genidea/gen.route";
 
-export const routes = [new GenRoute()];
+import { Route } from "./routes.interface";
+import authRouter from "./authentication/auth.route";
+
+export const routes: Route[] = [new GenRoute()
+  {
+    path: "auth",
+    router: authRouter,
+  },
+];
