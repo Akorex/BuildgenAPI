@@ -8,8 +8,10 @@ export const ai = new GoogleGenAI({
 export class GenService {
   public async generateBuildIdea(payload: genDTO) {
     try {
+      console.log(payload);
+
       const response = await ai.models.generateContent({
-        model: "gemini-2.0-flash",
+        model: "gemini-2.0-pro",
         contents: `
         You are a product architect that helps builders quickly design MVPs.
         
@@ -55,6 +57,8 @@ export class GenService {
         `,
       });
       console.log(response.text);
+
+      return response.text;
     } catch (error) {
       throw error;
     }

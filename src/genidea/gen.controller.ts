@@ -1,10 +1,11 @@
 import { Request, Response, NextFunction } from "express";
 import { GenService } from "./gen.services";
+import genRequest from "./gen.model";
 
 export class GenController {
   private genService = new GenService();
 
-  public async generate(req: Request, res: Response, next: NextFunction) {
+  generate = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const { category, creatorProfile, timeSpan } = req.body;
 
@@ -16,9 +17,17 @@ export class GenController {
 
       const results = await this.genService.generateBuildIdea(payload);
 
+      if (results) {
+        genRequest.create({
+          category,
+          creatorProfile,
+          timeSpan,
+        });
+      }
+
       // pass to gemini API to collect results
 
-      return res.status(200).json({
+      res.status(200).json({
         success: true,
         message: `Successfully generated AI product idea`,
         data: results,
@@ -26,5 +35,5 @@ export class GenController {
     } catch (error) {
       next(error);
     }
-  }
+  };
 }

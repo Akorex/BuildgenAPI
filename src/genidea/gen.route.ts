@@ -3,13 +3,13 @@ import { Router } from "express";
 
 export class GenRoute {
   public router = Router();
-  private controller = new GenController();
+  private genController = new GenController();
 
   constructor() {
     this.initRoutes();
   }
 
   initRoutes() {
-    this.router.post("/generate", this.controller.generate);
+    this.router.post("/generate", this.genController.generate);
   }
 }
